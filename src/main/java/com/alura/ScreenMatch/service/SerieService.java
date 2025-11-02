@@ -1,6 +1,7 @@
 package com.alura.ScreenMatch.service;
 
 import com.alura.ScreenMatch.dto.SerieDTO;
+import com.alura.ScreenMatch.exception.GenericNotFoundException;
 import com.alura.ScreenMatch.model.Serie;
 import com.alura.ScreenMatch.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class SerieService {
         //return serieRepository.findById(id).map(this::toDTO).orElse(null);
 
         return serieRepository.findById(id)
-                .orElse(null);
+                .orElseThrow(() -> new GenericNotFoundException("Série com ID " + id + " não encontrada."));
+
     }
 
     public List<String> getSerieFrases(Long id){
