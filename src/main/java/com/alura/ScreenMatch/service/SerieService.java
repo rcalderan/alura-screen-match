@@ -17,17 +17,20 @@ public class SerieService {
     @Autowired
     private SerieRepository serieRepository;
 
-    public SerieDTO getSerie(Long id){
-        return serieRepository.findById(id).map(this::toDTO).orElse(null);
+    public Serie getSerie(Long id){
+        //return serieRepository.findById(id).map(this::toDTO).orElse(null);
+
+        return serieRepository.findById(id)
+                .orElse(null);
     }
 
     public List<String> getSerieFrases(Long id){
         return serieRepository.getSerieFrase(id);
     }
 
-    public SerieDTO saveSerie(Serie serie){
+    public Serie saveSerie(Serie serie){
         try{
-            return this.toDTO(serieRepository.save(serie));
+            return serieRepository.save(serie);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
